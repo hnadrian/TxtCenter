@@ -31,10 +31,11 @@ public class MainController {
 		toolBar.managedProperty().bind(selectedToolBar);
 		selectedInfoBar = new SimpleBooleanProperty(true);
 		infoBar.managedProperty().bind(selectedInfoBar);
+		Main.getStage().setTitle("Untitled.txt");
 	}
 
 	public void newFile(ActionEvent event) {
-
+		setDefaultTitle();
 	}
 
 	public void openFile() throws IOException {
@@ -42,6 +43,15 @@ public class MainController {
 		if (selectedFile != null) {
 			textArea.replaceText(FileOperations.readFile(selectedFile));
 		}
+		setFileTitle(selectedFile.getName());
+	}
+	
+	private static void setFileTitle(String title) {
+		Main.getStage().setTitle(title);
+	}
+	
+	private static void setDefaultTitle() {
+		Main.getStage().setTitle("Untitled.txt");
 	}
 	
 	public void clearAll() {
