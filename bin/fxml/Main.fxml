@@ -6,22 +6,25 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.fxmisc.richtext.StyleClassedTextArea?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200.0" minWidth="400.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar prefWidth="600.0" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
                   <MenuItem mnemonicParsing="false" text="New" />
-              <MenuItem mnemonicParsing="false" text="Open" />
+              <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Save" />
                   <MenuItem mnemonicParsing="false" text="Save As..." />
@@ -33,12 +36,12 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Undo" />
-                  <MenuItem mnemonicParsing="false" text="Redo" />
+                  <MenuItem mnemonicParsing="false" onAction="#undo" text="Undo" />
+                  <MenuItem mnemonicParsing="false" onAction="#redo" text="Redo" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Select All" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Clear All" />
+                  <MenuItem mnemonicParsing="false" onAction="#clearAll" text="Clear" />
                </items>
           </Menu>
             <Menu mnemonicParsing="false" text="View">
@@ -56,7 +59,7 @@
       </MenuBar>
    </top>
    <bottom>
-      <HBox fx:id="infoBar" alignment="BOTTOM_RIGHT" prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox fx:id="infoBar" alignment="BOTTOM_RIGHT" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" prefHeight="22.0" prefWidth="63.0" text="(File Type)" wrapText="true">
                <font>
@@ -72,14 +75,75 @@
       </HBox>
    </bottom>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
-            <ToolBar fx:id="toolBar" prefHeight="40.0" prefWidth="200.0">
+            <ToolBar fx:id="toolBar" prefHeight="0.0" prefWidth="600.0">
               <items>
-                <Button mnemonicParsing="false" text="Button" />
+                <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
+                           <image>
+                              <Image url="@../img/bold-regular-24.png" />
+                           </image></ImageView>
+                     </graphic></Button>
+                  <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
+                           <image>
+                              <Image url="@../img/italic-regular-24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
+                           <image>
+                              <Image url="@../img/underline-regular-24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
+                           <image>
+                              <Image url="@../img/strikethrough-regular-24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator orientation="VERTICAL" />
+                  <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
+                           <image>
+                              <Image url="@../img/align-left-regular-24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
+                           <image>
+                              <Image url="@../img/align-middle-regular-24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
+                           <image>
+                              <Image url="@../img/align-right-regular-24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
               </items>
             </ToolBar>
-            <StyleClassedTextArea prefWidth="600.0" VBox.vgrow="ALWAYS" />
+            <StyleClassedTextArea fx:id="textArea" wrapText="true" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </center>

@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.fxmisc.richtext.StyleClassedTextArea;
 
@@ -11,11 +12,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
-import javafx.stage.FileChooser;
 
 public class MainController {
 	@FXML
-	private StyleClassedTextArea textA;
+	private StyleClassedTextArea textArea;
 
 	@FXML
 	private ToolBar toolBar;
@@ -27,11 +27,9 @@ public class MainController {
 	BooleanProperty selectedInfoBar;
 	
 	public void initialize() {
-		selectedToolBar = new SimpleBooleanProperty();
-		selectedToolBar.set(true);
+		selectedToolBar = new SimpleBooleanProperty(true);
 		toolBar.managedProperty().bind(selectedToolBar);
-		selectedInfoBar = new SimpleBooleanProperty();
-		selectedInfoBar.set(true);
+		selectedInfoBar = new SimpleBooleanProperty(true);
 		infoBar.managedProperty().bind(selectedInfoBar);
 	}
 
@@ -39,10 +37,23 @@ public class MainController {
 
 	}
 
-	public void openFile() {
-		FileChooser fc = new FileChooser();
-		fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Plain Text Files", "*.txt", "*.rtf"));
-		File selectedFile = fc.showOpenDialog(null);
+	public void openFile() throws IOException {
+		File selectedFile = FileOperations.open();
+		if (selectedFile != null) {
+			textArea.replaceText(FileOperations.readFile(selectedFile));
+		}
+	}
+	
+	public void clearAll() {
+		textArea.clear();
+	}
+	
+	public void undo() {
+		textArea.undo();
+	}
+	
+	public void redo() {
+		textArea.redo();
 	}
 
 	public void closeApp(ActionEvent event) {
