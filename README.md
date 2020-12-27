@@ -1,3 +1,3 @@
-#TxtCenter - Rich Text Editing Tool (in development)
+# TxtCenter - Rich Text Editing Tool (in development)
 
-##Features
+## Features
