@@ -1,0 +1,26 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.root {
+	-fx-font-family: 'Arial';
+	-fx-font-size: 13;
+	
+}
+
+.label {
+	
+}
+
+.button {
+	-fx-font-size: 13;
+	-fx-background-radius: 20;
+	-fx-font-weight: lighter;
+}
+
+.styled-text-area {
+    /* set the entire area's font size to the given size */
+    -fx-font-size: 14;
+    -fx-padding: 5 5 5 5;
+}
+
+button:hover {
+	
+}
