@@ -21,6 +21,18 @@
     -fx-padding: 5 5 5 5;
 }
 
-button:hover {
-	
+.bold {
+	-fx-font-weight: bold;
+}
+
+.italic {
+	-fx-font-style: italic;
+}
+
+.underline {
+	-fx-underline: true;
+}
+
+.strike {
+	-fx-strikethrough: true;	
 }

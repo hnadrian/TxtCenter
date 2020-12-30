@@ -19,6 +19,8 @@ public class Main extends Application {
 			primaryStage.setMinWidth(300);
 			primaryStage.setMinHeight(300);
 			primaryStage.show();
+			
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

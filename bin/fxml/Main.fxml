@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.fxmisc.flowless.VirtualizedScrollPane?>
 <?import org.fxmisc.richtext.StyleClassedTextArea?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
@@ -80,14 +81,14 @@
          <children>
             <ToolBar fx:id="toolBar" prefHeight="0.0" prefWidth="600.0">
               <items>
-                <Button fx:id="boldBtn" maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                <Button fx:id="boldBtn" maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false" onAction="#toggleBold">
                      <graphic>
                         <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
                            <image>
                               <Image url="@../img/bold-regular-24.png" />
                            </image></ImageView>
                      </graphic></Button>
-                  <Button fx:id="italicBtn" maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                  <Button fx:id="italicBtn" maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false" onAction="#toggleItalic">
                      <graphic>
                         <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
                            <image>
@@ -96,7 +97,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="underlineBtn" maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                  <Button fx:id="underlineBtn" maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false" onAction="#toggleUnderline">
                      <graphic>
                         <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
                            <image>
@@ -105,7 +106,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="strikeBtn" maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                  <Button fx:id="strikeBtn" maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false" onAction="#toggleStrike">
                      <graphic>
                         <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
                            <image>
@@ -144,10 +145,15 @@
                   </Button>
               </items>
             </ToolBar>
-            <StyleClassedTextArea fx:id="textArea" wrapText="true" VBox.vgrow="ALWAYS">
+            <VirtualizedScrollPane VBox.vgrow="ALWAYS">
+           <content>
+               <StyleClassedTextArea fx:id="textArea" wrapText="true" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
-               </VBox.margin></StyleClassedTextArea>
+               </VBox.margin>
+            </StyleClassedTextArea>
+            </content>
+            </VirtualizedScrollPane>
          </children>
       </VBox>
    </center>
