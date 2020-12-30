@@ -48,3 +48,7 @@
 .align-right {
 	-fx-text-alignment: right;
 }
+
+.justify {
+	-fx-text-alignment: justify;
+}

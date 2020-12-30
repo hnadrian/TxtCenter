@@ -129,6 +129,10 @@ public class MainController {
 	public void toggleAlignRight() {
 		TextOperations.updateParagraphStyleInSelection(textArea, "align-right", textArea.getSelection());
 	}
+	
+	public void toggleJustify() {
+		TextOperations.updateParagraphStyleInSelection(textArea, "justify", textArea.getSelection());
+	}
 
 	public void toolBarVisible(ActionEvent event) {
 		selectedToolBar.set(!selectedToolBar.get());
