@@ -16,12 +16,15 @@ public class TextOperations {
 			StyleSpans<Collection<String>> styles = textArea.getStyleSpans(selection);
 			StyleSpans<Collection<String>> newStyles = styles.mapStyles(styleCol -> {
 				ArrayList<String> combineStyles = new ArrayList<>(styleCol);
-				combineStyles.add(styleToAdd);
+				if (combineStyles.contains(styleToAdd)) {
+					combineStyles.remove(styleToAdd);
+				} else {
+					combineStyles.add(styleToAdd);
+				}
 				return combineStyles;
 			});
 			textArea.setStyleSpans(selection.getStart(), newStyles);
 		}
 	}
-	
 
 }

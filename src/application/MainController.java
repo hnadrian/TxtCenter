@@ -155,5 +155,4 @@ public class MainController {
 	private void updateContent(String content) {
 		currentContent = content;
 	}
-
 }
