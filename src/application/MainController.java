@@ -17,10 +17,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.IndexRange;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 public class MainController {
 	@FXML
-	private StyleClassedTextArea textArea;
+	protected StyleClassedTextArea textArea;
 
 	@FXML
 	private ToolBar toolBar;
@@ -98,6 +99,8 @@ public class MainController {
 		Platform.exit(); // Exit from JavaFx
 		System.exit(0);
 	}
+	
+	//Should I update content to match 
 
 	public void toggleBold() {
 		TextOperations.updateStyleInSelection(textArea, "bold", textArea.getSelection());
@@ -114,7 +117,18 @@ public class MainController {
 	public void toggleStrike() {
 		TextOperations.updateStyleInSelection(textArea, "strike", textArea.getSelection());
 	}
-
+	
+	public void toggleAlignLeft() {
+		TextOperations.updateParagraphStyleInSelection(textArea, "align-left", textArea.getSelection());
+	}
+	
+	public void toggleAlignCenter() {
+		TextOperations.updateParagraphStyleInSelection(textArea, "align-center", textArea.getSelection());
+	}
+	
+	public void toggleAlignRight() {
+		TextOperations.updateParagraphStyleInSelection(textArea, "align-right", textArea.getSelection());
+	}
 
 	public void toolBarVisible(ActionEvent event) {
 		selectedToolBar.set(!selectedToolBar.get());

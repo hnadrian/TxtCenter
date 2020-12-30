@@ -36,3 +36,15 @@
 .strike {
 	-fx-strikethrough: true;	
 }
+
+.align-left {
+	-fx-text-alignment: left;
+}
+
+.align-center {
+	-fx-text-alignment: center;
+}
+
+.align-right {
+	-fx-text-alignment: right;
+}

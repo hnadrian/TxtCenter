@@ -1,9 +1,11 @@
 package application;
 
-import java.time.format.TextStyle;
+import static org.fxmisc.richtext.model.TwoDimensional.Bias.Backward;
+import static org.fxmisc.richtext.model.TwoDimensional.Bias.Forward;
+
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.function.Function;
+import java.util.Collections;
 
 import org.fxmisc.richtext.StyleClassedTextArea;
 import org.fxmisc.richtext.model.StyleSpans;
@@ -23,8 +25,17 @@ public class TextOperations {
 				}
 				return combineStyles;
 			});
+			
 			textArea.setStyleSpans(selection.getStart(), newStyles);
 		}
 	}
-
+	
+	public static void updateParagraphStyleInSelection(StyleClassedTextArea textArea, String styleToAdd, IndexRange selection) {
+		int startPar = textArea.offsetToPosition(selection.getStart(), Forward).getMajor();
+        int endPar = textArea.offsetToPosition(selection.getEnd(), Backward).getMajor();
+        
+        for(int i = startPar; i <= endPar; ++i) {
+            textArea.setParagraphStyle(i, Collections.singleton(styleToAdd));
+        }
+    }
 }

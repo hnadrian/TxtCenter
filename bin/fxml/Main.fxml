@@ -19,7 +19,7 @@
 <?import org.fxmisc.flowless.VirtualizedScrollPane?>
 <?import org.fxmisc.richtext.StyleClassedTextArea?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <top>
       <MenuBar prefWidth="600.0" BorderPane.alignment="CENTER">
         <menus>
@@ -77,9 +77,9 @@
       </HBox>
    </bottom>
    <center>
-      <VBox BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <ToolBar fx:id="toolBar" prefHeight="0.0" prefWidth="600.0">
+            <ToolBar fx:id="toolBar">
               <items>
                 <Button fx:id="boldBtn" maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false" onAction="#toggleBold">
                      <graphic>
@@ -116,7 +116,7 @@
                      </graphic>
                   </Button>
                   <Separator orientation="VERTICAL" />
-                  <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                  <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false" onAction="#toggleAlignLeft">
                      <graphic>
                         <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
                            <image>
@@ -125,7 +125,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                  <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false" onAction="#toggleAlignCenter">
                      <graphic>
                         <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
                            <image>
@@ -134,7 +134,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false">
+                  <Button maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false" onAction="#toggleAlignRight">
                      <graphic>
                         <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7" scaleZ="1.5">
                            <image>
@@ -146,13 +146,13 @@
               </items>
             </ToolBar>
             <VirtualizedScrollPane VBox.vgrow="ALWAYS">
-           <content>
-               <StyleClassedTextArea fx:id="textArea" wrapText="true" VBox.vgrow="ALWAYS">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </StyleClassedTextArea>
-            </content>
+               <content>
+                  <StyleClassedTextArea fx:id="textArea" wrapText="true" VBox.vgrow="ALWAYS">
+                  <VBox.margin>
+                     <Insets />
+                  </VBox.margin>
+                  </StyleClassedTextArea>
+               </content>
             </VirtualizedScrollPane>
          </children>
       </VBox>
