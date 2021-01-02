@@ -2,7 +2,7 @@
 An editing tool that fulfills your basic needs of note taking and writings.
 Project is currently under development...
 
-![TxtCenter](github.com/truhingu/TxtCenter/blob/main/src/img/TxtCenter.png)
+![TxtCenter](https://raw.githubusercontent.com/truhingu/TxtCenter/main/src/img/TxtCenter.png)
 
 ## Features
 * Text Stylers (Bold, Italic, Underline, Strikethrough)
