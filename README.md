@@ -11,3 +11,6 @@ Project is currently under development...
 * Font & Size setting (for whole text)
 * Word Counter
 * Undo/Redo
+
+## Library
+[RichTextFX](https://github.com/FXMisc/RichTextFX)
