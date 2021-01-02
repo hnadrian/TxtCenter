@@ -9,4 +9,5 @@ Project is currently under development...
 * Text Highlighter
 * Paragraph Alignments & Justify
 * Font & Size setting (for whole text)
+* Word Counter
 * Undo/Redo
