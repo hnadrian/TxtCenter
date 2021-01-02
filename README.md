@@ -8,7 +8,7 @@ Project is currently under development...
 * Text Stylers (Bold, Italic, Underline, Strikethrough)
 * Text Highlighter
 * Paragraph Alignments & Justify
-* Font & Size setting (for whole text)
+* Font & Size setting (whole text)
 * Word Counter
 * Undo/Redo
 
