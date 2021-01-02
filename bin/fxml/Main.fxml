@@ -3,12 +3,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -19,7 +21,7 @@
 <?import org.fxmisc.flowless.VirtualizedScrollPane?>
 <?import org.fxmisc.richtext.StyleClassedTextArea?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<BorderPane prefHeight="500.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <top>
       <MenuBar prefWidth="600.0" BorderPane.alignment="CENTER">
         <menus>
@@ -41,7 +43,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#undo" text="Undo" />
                   <MenuItem mnemonicParsing="false" onAction="#redo" text="Redo" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Select All" />
+                  <MenuItem mnemonicParsing="false" onAction="#selectAll" text="Select All" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#clearAll" text="Clear" />
                </items>
@@ -77,9 +79,9 @@
       </HBox>
    </bottom>
    <center>
-      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
-            <ToolBar fx:id="toolBar">
+            <ToolBar fx:id="toolBar" prefWidth="200.0">
               <items>
                 <Button fx:id="boldBtn" maxHeight="15.0" maxWidth="15.0" mnemonicParsing="false" onAction="#toggleBold">
                      <graphic>
@@ -152,6 +154,10 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Separator orientation="VERTICAL" />
+                  <Spinner fx:id="sizeSpinner" editable="true" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
+                  <ComboBox fx:id="fontFamBox" onAction="#updateFontFam" prefWidth="120.0" promptText="Select Font" />
+                  <ComboBox fx:id="hColorBox" maxWidth="30.0" minWidth="30.0" onAction="#updateHColor" prefWidth="30.0" />
               </items>
             </ToolBar>
             <VirtualizedScrollPane VBox.vgrow="ALWAYS">

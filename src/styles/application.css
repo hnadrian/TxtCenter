@@ -21,6 +21,10 @@
     -fx-padding: 5 5 5 5;
 }
 
+.combo-box .arrow, .combo-box .arrow-button{
+    -fx-background-color: transparent;
+}
+
 .bold {
 	-fx-font-weight: bold;
 }
@@ -52,3 +56,28 @@
 .justify {
 	-fx-text-alignment: justify;
 }
+
+.h-transparent {
+	-rtfx-background-color: transparent;
+}
+
+.h-lime{
+	-rtfx-background-color: lime;
+}
+
+.h-cyan{
+	-rtfx-background-color: cyan;
+}
+
+.h-orangered{
+	-rtfx-background-color: orangered;
+}
+
+.h-yellow{
+	-rtfx-background-color: yellow;
+}
+
+.h-orange{
+	-rtfx-background-color: orange;
+}
+
