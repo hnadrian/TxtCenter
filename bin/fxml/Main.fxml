@@ -65,14 +65,9 @@
    <bottom>
       <HBox fx:id="infoBar" alignment="BOTTOM_RIGHT" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="22.0" prefWidth="63.0" text="(File Type)" wrapText="true">
+            <Label fx:id="wordCount" prefHeight="20.0" prefWidth="102.0" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font name="Arial" size="12.0" />
-               </font>
-            </Label>
-            <Label prefHeight="20.0" prefWidth="86.0" text="Word Count: " wrapText="true">
-               <font>
-                  <Font name="Arial" size="12.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
          </children>

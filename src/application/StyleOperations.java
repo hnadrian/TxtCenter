@@ -29,6 +29,7 @@ public class StyleOperations {
 		}
 	}
 	
+	//Future: Clean up & possible change styling structure to reduce unnecessary code
 	public static void updateColorInSelection(StyleClassedTextArea textArea, String colorToAdd, IndexRange selection) {
 		if (selection.getLength() != 0) {
 			StyleSpans<Collection<String>> styles = textArea.getStyleSpans(selection);

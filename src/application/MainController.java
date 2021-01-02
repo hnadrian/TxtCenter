@@ -3,18 +3,19 @@ package application;
 import java.io.File;
 import java.io.IOException;
 
-import org.fxmisc.richtext.CustomStyleableProperty;
 import org.fxmisc.richtext.StyleClassedTextArea;
 
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.css.StyleableObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
@@ -22,7 +23,6 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
@@ -31,6 +31,9 @@ import javafx.util.Callback;
 public class MainController {
 	@FXML
 	protected StyleClassedTextArea textArea;
+	
+	@FXML
+	private Label wordCount;
 
 	@FXML
 	private ToolBar toolBar;
@@ -45,13 +48,14 @@ public class MainController {
 	private ComboBox<String> hColorBox;
 
 	@FXML
-	private Spinner sizeSpinner;
+	private Spinner<Integer> sizeSpinner;
 
 	private File currentFile;
 	private String currentContent;
 	private String fileContent = "";
 	private boolean modified = false;
-	private static final String DEFAULT_TITLE = "Untitled.txt";
+	private int wCount;
+	private static final String DEFAULT_TITLE = "Untitled";
 	private static final int DEFAULT_TEXT_SIZE = 14;
 	private static final String RTFX_FILE_EXTENSION = ".rtfx";
 	private static final String RTF_FILE_EXTENSION = ".rtf";
@@ -64,13 +68,11 @@ public class MainController {
 		toolBar.managedProperty().bind(selectedToolBar);
 		selectedInfoBar = new SimpleBooleanProperty(true);
 		infoBar.managedProperty().bind(selectedInfoBar);
-		Main.getStage().setTitle("Untitled.txt");
+		Main.getStage().setTitle(DEFAULT_TITLE);
 
 		ObservableList fonts = FXCollections.observableArrayList(Font.getFamilies());
 		fontFamBox.getItems().addAll(fonts);
-
-		// colorPicker.valueProperty().addListener((observable, oldColor, newColor) ->
-		// updateTextColor(newColor));
+		fontFamBox.valueProperty().setValue("Arial");
 		ObservableList<String> highlights = FXCollections.observableArrayList("transparent", "yellow", "lime",
 				"orangered", "orange", "cyan");
 		hColorBox.setItems(highlights);
@@ -87,10 +89,16 @@ public class MainController {
 
 		sizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 50));
 		sizeSpinner.getValueFactory().setValue(DEFAULT_TEXT_SIZE);
-		// sizeSpinner.valueProperty().addListener((obs, oldValue, newValue) ->
-		// updateFontSize((int) newValue));
-		sizeSpinner.valueProperty()
-				.addListener((obs, oldValue, newValue) -> textArea.setStyle("-fx-font-size: " + newValue + ";"));
+		sizeSpinner.valueProperty().addListener((obs, oldValue, newValue) -> updateFontSize(newValue)); // Manually adding eventHandler
+		
+		wordCount.textProperty().setValue("(0 words)");
+		//Listening for changes in textArea to update word Count
+		textArea.textProperty().addListener(new ChangeListener<String>() {
+	        @Override
+	        public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+	            updateWordCount(newValue);
+	        }
+	    });
 	}
 
 	public void newFile(ActionEvent event) {
@@ -102,6 +110,7 @@ public class MainController {
 			currentContent = "";
 			setDefaultTitle();
 			clearAll();
+			wCount = 0;
 		}
 	}
 
@@ -135,6 +144,18 @@ public class MainController {
 
 	public void saveFileAs() throws IOException {
 		setFile(FileOperations.create(textArea.getText()));
+	}
+	
+	public void updateFileType() {
+		
+	}
+	
+	public void updateWordCount(String newContent) {
+		wCount = 0;;
+		if (newContent != null) {
+			wCount = newContent.split("\\s+").length;
+		}
+		wordCount.textProperty().setValue("(" + wCount + " words" + ")");
 	}
 
 	public void clearAll() {
@@ -193,11 +214,13 @@ public class MainController {
 	}
 
 	public void updateFontFam() {
-
+		textArea.setStyle("-fx-font-family: " + fontFamBox.getValue() + ";");
 	}
 
 	public void updateFontSize(int newSize) {
-		StyleOperations.updateSizeInSelection(textArea, newSize, textArea.getSelection());
+		textArea.setStyle("-fx-font-size: " + newSize + ";");
+		// StyleOperations.updateSizeInSelection(textArea, newSize,
+		// textArea.getSelection());
 	}
 
 	public void updateHColor() {
@@ -251,7 +274,8 @@ public class MainController {
 		int blue = (int) (color.getBlue() * 255);
 		return "rgb(" + red + ", " + green + ", " + blue + ")";
 	}
-
+	
+	//Colorizing Highlighter Combobox
 	static class ColorRectCell extends ListCell<String> {
 		@Override
 		public void updateItem(String item, boolean empty) {
