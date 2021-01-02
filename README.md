@@ -1,4 +1,4 @@
-# TxtCenter - Text Editing & Note Taking Tool
+# TxtCenter - Writing & Note Taking Tool
 An editing tool that fulfills your basic needs of note taking and writings.
 Project is currently under development...
 
