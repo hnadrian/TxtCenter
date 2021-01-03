@@ -18,50 +18,42 @@ public class StyleOperations {
 			StyleSpans<Collection<String>> styles = textArea.getStyleSpans(selection);
 			StyleSpans<Collection<String>> newStyles = styles.mapStyles(styleCol -> {
 				ArrayList<String> combineStyles = new ArrayList<>(styleCol);
-				if (combineStyles.contains(styleToAdd)) {
-					combineStyles.remove(styleToAdd);
-				} else {
-					combineStyles.add(styleToAdd);
-				}
-				return combineStyles;
-			});
-			textArea.setStyleSpans(selection.getStart(), newStyles);
-		}
-	}
-	
-	//Future: Clean up & possible change styling structure to reduce unnecessary code
-	public static void updateColorInSelection(StyleClassedTextArea textArea, String colorToAdd, IndexRange selection) {
-		if (selection.getLength() != 0) {
-			StyleSpans<Collection<String>> styles = textArea.getStyleSpans(selection);
-			StyleSpans<Collection<String>> newStyles = styles.mapStyles(styleCol -> {
-				ArrayList<String> combineStyles = new ArrayList<>(styleCol);
-				for (String colorStyle : combineStyles) {
-					if (colorStyle.startsWith("h-")) {
-						combineStyles.remove(colorStyle);
-						break;
+				if (styleToAdd.startsWith("-h")) {
+					for (String colorStyle : combineStyles) {
+						if (colorStyle.startsWith("h-")) {
+							combineStyles.remove(colorStyle);
+							break;
+						}
 					}
+					combineStyles.add(styleToAdd);
+
+				} else {
+					if (combineStyles.contains(styleToAdd)) {
+						combineStyles.remove(styleToAdd);
+					} else {
+						combineStyles.add(styleToAdd);
+					}
+
 				}
-				combineStyles.add(colorToAdd);
 				return combineStyles;
+
 			});
 			textArea.setStyleSpans(selection.getStart(), newStyles);
 		}
 	}
-	
+
 	// For future references Notice the .add method, -> not possible
-	public static void updateSizeInSelection(StyleClassedTextArea textArea, int sizeToAdd, IndexRange selection) {
-		if (selection.getLength() != 0) {
-			StyleSpans<Collection<String>> styles = textArea.getStyleSpans(selection);
-			StyleSpans<Collection<String>> newStyles = styles.mapStyles(styleCol -> {
-				ArrayList<String> combineStyles = new ArrayList<>(styleCol);
-				combineStyles.add("-fx-font-size: " + sizeToAdd + ";");
-				return combineStyles;
-			});
-			textArea.setStyleSpans(selection.getStart(), newStyles);
-		}
-	}
-	
-	
+//	public static void updateSizeInSelection(StyleClassedTextArea textArea, int sizeToAdd, IndexRange selection) {
+//		if (selection.getLength() != 0) {
+//			StyleSpans<Collection<String>> styles = textArea.getStyleSpans(selection);
+//			StyleSpans<Collection<String>> newStyles = styles.mapStyles(styleCol -> {
+//				ArrayList<String> combineStyles = new ArrayList<>(styleCol);
+//				combineStyles.add("-fx-font-size: " + sizeToAdd + ";");
+//				return combineStyles;
+//			});
+//			textArea.setStyleSpans(selection.getStart(), newStyles);
+//		}v
+//	}
 
 	public static void updateParagraphStyleInSelection(StyleClassedTextArea textArea, String styleToAdd,
 			IndexRange selection) {

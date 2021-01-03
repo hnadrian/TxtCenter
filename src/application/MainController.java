@@ -225,7 +225,7 @@ public class MainController {
 
 	public void updateHColor() {
 		String newHColor = hColorBox.getValue();
-		StyleOperations.updateColorInSelection(textArea, "h-" + newHColor, textArea.getSelection());
+		StyleOperations.updateStyleInSelection(textArea, "h-" + newHColor, textArea.getSelection());
 	}
 
 	public void toolBarVisible(ActionEvent event) {
