@@ -89,7 +89,7 @@ public class MainController {
 
 		sizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 50));
 		sizeSpinner.getValueFactory().setValue(DEFAULT_TEXT_SIZE);
-		sizeSpinner.valueProperty().addListener((obs, oldValue, newValue) -> updateFontSize(newValue)); // Manually adding eventHandler
+		sizeSpinner.valueProperty().addListener((observable, oldValue, newValue) -> updateFontSize(newValue)); // Manually adding eventHandler
 		
 		wordCount.textProperty().setValue("(0 words)");
 		//Listening for changes in textArea to update word Count
@@ -99,6 +99,12 @@ public class MainController {
 	            updateWordCount(newValue);
 	        }
 	    });
+		
+		//Listening for changes of Caret Position to update toolBar (under developement)
+		textArea.caretPositionProperty().addListener((observable, oldValue,
+	            newValue) -> {
+	            	
+	            });
 	}
 
 	public void newFile(ActionEvent event) {
