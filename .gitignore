@@ -1,7 +1,7 @@
 *.class
 .DS_Store
 
-settings/
+.settings/
 .project
 .classpath
 
