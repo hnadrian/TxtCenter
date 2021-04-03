@@ -186,7 +186,7 @@ public class MainController {
 	}
 
 	// Should I update content to match
-
+	
 	public void toggleBold() {
 		StyleOperations.updateStyleInSelection(textArea, "bold", textArea.getSelection());
 	}

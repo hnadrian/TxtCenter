@@ -18,7 +18,7 @@ public class StyleOperations {
 			StyleSpans<Collection<String>> styles = textArea.getStyleSpans(selection);
 			StyleSpans<Collection<String>> newStyles = styles.mapStyles(styleCol -> {
 				ArrayList<String> combineStyles = new ArrayList<>(styleCol);
-				if (styleToAdd.startsWith("-h")) {
+				if (styleToAdd.startsWith("h-")) {
 					for (String colorStyle : combineStyles) {
 						if (colorStyle.startsWith("h-")) {
 							combineStyles.remove(colorStyle);
@@ -52,7 +52,7 @@ public class StyleOperations {
 //				return combineStyles;
 //			});
 //			textArea.setStyleSpans(selection.getStart(), newStyles);
-//		}v
+//		}
 //	}
 
 	public static void updateParagraphStyleInSelection(StyleClassedTextArea textArea, String styleToAdd,
