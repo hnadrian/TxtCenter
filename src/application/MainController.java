@@ -48,7 +48,7 @@ public class MainController {
 	private ComboBox<String> hColorBox;
 
 	@FXML
-	private Spinner<Integer> sizeSpinner;
+	private ComboBox<String> fontSizeBox;
 
 	private File currentFile;
 	private String currentContent;
@@ -56,7 +56,7 @@ public class MainController {
 	private boolean modified = false;
 	private int wCount;
 	private static final String DEFAULT_TITLE = "Untitled";
-	private static final int DEFAULT_TEXT_SIZE = 14;
+	private static final String DEFAULT_TEXT_SIZE = "Medium";
 	private static final String RTFX_FILE_EXTENSION = ".rtfx";
 	private static final String RTF_FILE_EXTENSION = ".rtf";
 
@@ -70,9 +70,12 @@ public class MainController {
 		infoBar.managedProperty().bind(selectedInfoBar);
 		Main.getStage().setTitle(DEFAULT_TITLE);
 
+		//Font Text Box Handling
 		ObservableList fonts = FXCollections.observableArrayList(Font.getFamilies());
 		fontFamBox.getItems().addAll(fonts);
 		fontFamBox.valueProperty().setValue("Arial");
+		
+		//Hightlight Tex Box Handling
 		ObservableList<String> highlights = FXCollections.observableArrayList("transparent", "yellow", "lime",
 				"orangered", "orange", "cyan");
 		hColorBox.setItems(highlights);
@@ -85,12 +88,16 @@ public class MainController {
 		hColorBox.setCellFactory(factory);
 		hColorBox.setButtonCell(factory.call(null));
 
-		textArea.setStyle("-fx-font-size: " + DEFAULT_TEXT_SIZE + ";");
-
-		sizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 50));
-		sizeSpinner.getValueFactory().setValue(DEFAULT_TEXT_SIZE);
-		sizeSpinner.valueProperty().addListener((observable, oldValue, newValue) -> updateFontSize(newValue)); // Manually adding eventHandler
+		//textArea.setStyle("-fx-font-size: " + DEFAULT_TEXT_SIZE + ";");
+		textArea.setStyle("fs-medium");
 		
+		//Font size handling with comboBox
+		ObservableList<String> fontSizes = FXCollections.observableArrayList("XX-Small", "X-Small", "Small",
+				"Medium", "Large", "X-Large", "XX-Large");
+		fontSizeBox.setItems(fontSizes);
+		fontSizeBox.valueProperty().setValue(DEFAULT_TEXT_SIZE);
+		
+		//Word count Handling
 		wordCount.textProperty().setValue("(0 words)");
 		//Listening for changes in textArea to update word Count
 		textArea.textProperty().addListener(new ChangeListener<String>() {
@@ -157,7 +164,7 @@ public class MainController {
 	}
 	
 	public void updateWordCount(String newContent) {
-		wCount = 0;;
+		int wCount = 0;
 		if (newContent != null) {
 			wCount = newContent.split("\\s+").length;
 		}
@@ -223,10 +230,9 @@ public class MainController {
 		textArea.setStyle("-fx-font-family: " + fontFamBox.getValue() + ";");
 	}
 
-	public void updateFontSize(int newSize) {
-		textArea.setStyle("-fx-font-size: " + newSize + ";");
-		// StyleOperations.updateSizeInSelection(textArea, newSize,
-		// textArea.getSelection());
+	public void updateFontSize() {
+		String newSize = fontSizeBox.getValue();
+		StyleOperations.updateStyleInSelection(textArea, "fs-" + newSize.toLowerCase(), textArea.getSelection());
 	}
 
 	public void updateHColor() {

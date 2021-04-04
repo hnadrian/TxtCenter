@@ -81,3 +81,30 @@
 	-rtfx-background-color: orange;
 }
 
+.fs-xx-small{
+	-fx-font-size: xx-small;
+}
+
+.fs-x-small{
+	-fx-font-size: x-small;
+}
+
+.fs-small{
+	-fx-font-size: small;
+}
+
+.fs-medium{
+	-fx-font-size: medium;
+}
+
+.fs-large {
+	-fx-font-size: large;
+}
+
+.fs-x-large{
+	-fx-font-size: x-large;
+}
+
+.fs-xx-large {
+	-fx-font-size: xx-large;
+}
