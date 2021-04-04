@@ -41,19 +41,6 @@ public class StyleOperations {
 		}
 	}
 
-	// For future references Notice the .add method, -> not possible
-	public static void updateSizeInSelection(StyleClassedTextArea textArea, int sizeToAdd, IndexRange selection) {
-		if (selection.getLength() != 0) {
-			StyleSpans<Collection<String>> styles = textArea.getStyleSpans(selection);
-			StyleSpans<Collection<String>> newStyles = styles.mapStyles(styleCol -> {
-				ArrayList<String> combineStyles = new ArrayList<>(styleCol);
-				combineStyles.add("-fx-font-size: " + sizeToAdd + ";");
-				return combineStyles;
-			});
-			textArea.setStyleSpans(selection.getStart(), newStyles);
-		}
-	}
-
 	public static void updateParagraphStyleInSelection(StyleClassedTextArea textArea, String styleToAdd,
 			IndexRange selection) {
 		int startPar = textArea.offsetToPosition(selection.getStart(), Forward).getMajor();
