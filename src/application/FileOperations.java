@@ -89,9 +89,11 @@ public class FileOperations {
 		fc.setTitle("Open File");
 		fc.setInitialDirectory(new File(initialDir));
 		File newFile = fc.showSaveDialog(null);
-		Formatter form = new Formatter(newFile);
-		form.format("%s", content);
-		form.close();
+		if (newFile != null) {
+			Formatter form = new Formatter(newFile);
+			form.format("%s", content);
+			form.close();
+		}
 		return newFile;
 	}
 
