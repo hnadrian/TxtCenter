@@ -18,8 +18,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -71,7 +69,7 @@ public class MainController {
 		Main.getStage().setTitle(DEFAULT_TITLE);
 
 		//Font Text Box Handling
-		ObservableList fonts = FXCollections.observableArrayList(Font.getFamilies());
+		ObservableList<String> fonts = FXCollections.observableArrayList(Font.getFamilies());
 		fontFamBox.getItems().addAll(fonts);
 		fontFamBox.valueProperty().setValue("Arial");
 		
