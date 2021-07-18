@@ -38,6 +38,9 @@ public class StyleOperations {
 
 			});
 			textArea.setStyleSpans(selection.getStart(), newStyles);
+			if (styleToAdd.startsWith("h-") && styleToAdd.startsWith("h-")) {
+				textArea.deselect();
+			}
 		}
 	}
 
