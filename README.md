@@ -1,5 +1,5 @@
 # TxtCenter - Writing & Note Taking Tool
-An editing tool that fulfills your basic needs of note taking and writings.
+An editing tool that fulfills your needs of note taking and writings.
 
 <img src=https://raw.githubusercontent.com/hnadrian/TxtCenter/main/src/img/txtCenter.png width="600" height="562"> 
 
