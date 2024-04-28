@@ -25,6 +25,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 public class MainController {
 	@FXML
@@ -73,7 +75,7 @@ public class MainController {
 		fontFamBox.getItems().addAll(fonts);
 		fontFamBox.valueProperty().setValue("Arial");
 		
-		//Hightlight Tex Box Handling
+		//Highlight Text Box Handling
 		ObservableList<String> highlights = FXCollections.observableArrayList("transparent", "yellow", "lime",
 				"orangered", "orange", "cyan");
 		hColorBox.setItems(highlights);
@@ -105,7 +107,7 @@ public class MainController {
 	        }
 	    });
 		
-		//Listening for changes of Caret Position to update toolBar (under developement)
+		//Listening for changes of Caret Position to update toolBar (under development)
 		textArea.caretPositionProperty().addListener((observable, oldValue,
 	            newValue) -> {
 	            	
@@ -115,13 +117,17 @@ public class MainController {
 	public void newFile(ActionEvent event) {
 		updateModified();
 		if (modified == true) {
-			// Dialog warning
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You have unsaved changes. Continue?", ButtonType.YES, ButtonType.NO);
+	        alert.setTitle("Unsaved Changes");
+	        alert.setHeaderText("Confirm New File");
+	        
+	        alert.showAndWait().ifPresent(response -> {
+	            if (response == ButtonType.YES) {
+	                clearEditor();
+	            }
+	        });
 		} else {
-			currentFile = null;
-			currentContent = "";
-			setDefaultTitle();
-			clearAll();
-			wCount = 0;
+			clearEditor();
 		}
 	}
 
@@ -266,8 +272,9 @@ public class MainController {
 	}
 
 	private void updateModified() {
-		updateContent();
-		modified = !currentContent.equals(currentContent);
+		String newText = textArea.getText();
+	    modified = !newText.equals(currentContent);
+	    currentContent = newText;
 	}
 
 	private void updateContent() {
@@ -276,6 +283,14 @@ public class MainController {
 
 	private void updateContent(String content) {
 		currentContent = content;
+	}
+	
+	private void clearEditor() {
+		currentFile = null;
+		currentContent = "";
+		setDefaultTitle();
+		clearAll();
+		wCount = 0;
 	}
 
 	static String colorToCss(Color color) {
