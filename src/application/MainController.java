@@ -57,8 +57,8 @@ public class MainController {
 	private int wCount;
 	private static final String DEFAULT_TITLE = "Untitled";
 	private static final String DEFAULT_TEXT_SIZE = "Medium";
-	private static final String RTFX_FILE_EXTENSION = ".rtfx";
-	private static final String RTF_FILE_EXTENSION = ".rtf";
+	public static final String RTFX_FILE_EXTENSION = ".rtfx";
+	public static final String RTF_FILE_EXTENSION = ".rtf";
 
 	BooleanProperty selectedToolBar;
 	BooleanProperty selectedInfoBar;
@@ -136,31 +136,37 @@ public class MainController {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Load document");
 		fileChooser.setInitialDirectory(new File(initialDir));
-		fileChooser.setSelectedExtensionFilter(
-				new FileChooser.ExtensionFilter("*" + RTFX_FILE_EXTENSION, "*" + RTF_FILE_EXTENSION));
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+				"Text Files (*.txt, *.rtf, *.rtfx)",
+				"*.txt",
+				"*.rtf",
+				"*.rtfx"
+		);
+	    fileChooser.getExtensionFilters().add(extFilter);
 		File selectedFile = fileChooser.showOpenDialog(Main.getStage());
 		if (selectedFile != null) {
 			textArea.clear();
 			FileOperations.open(selectedFile, textArea);
+			setFileTitle(selectedFile.getName());
+			setFile(selectedFile);
 		}
-		setFileTitle(selectedFile.getName());
-		setFile(selectedFile);
 	}
 
 	public void saveFile() throws IOException {
-		String initialDir = System.getProperty("user.dir");
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Save document");
-		fileChooser.setInitialDirectory(new File(initialDir));
-		fileChooser.setInitialFileName("Untitled" + RTFX_FILE_EXTENSION);
-		File selectedFile = fileChooser.showSaveDialog(Main.getStage());
-		if (selectedFile != null) {
-			FileOperations.save(selectedFile, textArea);
-		}
+		updateModified();
+	    if (currentFile != null) {
+	        FileOperations.save(currentFile, textArea);
+	    } else {
+	        saveFileAs();
+	    }
 	}
 
 	public void saveFileAs() throws IOException {
-		setFile(FileOperations.create(textArea.getText()));
+		File newFile = FileOperations.create(textArea);
+		
+		if (newFile != null) {
+			setFile(newFile);
+		}
 	}
 	
 	public void updateFileType() {

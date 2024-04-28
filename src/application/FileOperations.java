@@ -21,17 +21,6 @@ import org.fxmisc.richtext.model.StyledSegment;
 import javafx.stage.FileChooser;
 
 public class FileOperations {
-	public static File open() throws IOException {
-		String initialDir = System.getProperty("user.dir");
-		FileChooser fc = new FileChooser();
-		fc.setTitle("Open File");
-		fc.setInitialDirectory(new File(initialDir));
-		fc.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("Plain Text Files", "Arbitrary RTFX file", "*.txt", "*.rtf", "*.rtfx"));
-		File selectedFile = fc.showOpenDialog(null);
-		return selectedFile;
-	}
-
 	public static File save(String newContent, File currentFile) throws IOException {
 		Formatter form = new Formatter(currentFile);
 		form.format("%s", newContent);
@@ -83,16 +72,21 @@ public class FileOperations {
 		}
 	}
 
-	public static File create(String content) throws IOException {
+	public static File create(StyleClassedTextArea textArea) throws IOException {
 		String initialDir = System.getProperty("user.dir");
 		FileChooser fc = new FileChooser();
-		fc.setTitle("Open File");
+		fc.setTitle("Save New File");
 		fc.setInitialDirectory(new File(initialDir));
-		File newFile = fc.showSaveDialog(null);
+		fc.setInitialFileName("Untitled");
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+				"RTF files (*.rtf, *.rtfx)",
+				"*.rtf",
+				"*.rtfx"
+		);
+	    fc.getExtensionFilters().add(extFilter);
+		File newFile = fc.showSaveDialog(Main.getStage());
 		if (newFile != null) {
-			Formatter form = new Formatter(newFile);
-			form.format("%s", content);
-			form.close();
+			FileOperations.save(newFile, textArea);
 		}
 		return newFile;
 	}
